@@ -1,0 +1,14 @@
+{
+  "name": "harmony-demo",
+  "version": "1.0.0",
+  "description": "HarmonyOS ArkTS 示例应用",
+  "author": "Cursor",
+  "license": "Apache-2.0",
+  "keywords": [
+    "harmonyos",
+    "arkts",
+    "sample"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}

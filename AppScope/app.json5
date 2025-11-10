@@ -1,0 +1,15 @@
+{
+  "app": {
+    "bundleName": "com.example.harmonydemo",
+    "vendor": "Cursor",
+    "version": {
+      "code": 1000000,
+      "name": "1.0.0"
+    },
+    "apiVersion": {
+      "compatible": 10,
+      "target": 11,
+      "releaseType": "Beta"
+    }
+  }
+}

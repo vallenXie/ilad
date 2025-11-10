@@ -1,0 +1,24 @@
+{
+  "app": {
+    "signingConfig": {
+      "profiles": {
+        "debug": {
+          "profile": "signature/profileDebug.json",
+          "certificate": "signature/certificateDebug.p12"
+        }
+      }
+    }
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "main": true,
+      "package": "com.example.harmonydemo",
+      "deviceTypes": [
+        "phone",
+        "tablet"
+      ]
+    }
+  ]
+}

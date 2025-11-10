@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name": "primary_background",
+      "value": "#F5F5F5"
+    },
+    {
+      "name": "primary_text",
+      "value": "#262626"
+    }
+  ]
+}
