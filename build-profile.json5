@@ -5,12 +5,41 @@
     "version": {
       "code": 1,
       "name": "1.0.0"
-    }
+    },
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "profile": "",
+          "certpath": "",
+          "storePassword": "",
+          "keyAlias": "",
+          "keyPassword": ""
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0.50",
+        "buildMode": "debug",
+        "runtimeOS": "HarmonyOS",
+        "deviceTypes": [
+          "phone",
+          "tablet"
+        ]
+      }
+    ]
   },
   "modules": [
     {
       "name": "entry",
       "srcPath": "./entry",
+      "products": [
+        "default"
+      ],
       "dependencies": []
     }
   ]
