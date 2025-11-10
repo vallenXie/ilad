@@ -1,0 +1,17 @@
+{
+  "app": {
+    "bundleName": "com.example.stockledger",
+    "vendor": "ExampleVendor",
+    "version": {
+      "code": 1,
+      "name": "1.0.0"
+    }
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "dependencies": []
+    }
+  ]
+}
