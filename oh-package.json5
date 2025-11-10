@@ -1,0 +1,17 @@
+{
+  "name": "stock-ledger",
+  "version": "1.0.0",
+  "type": "app",
+  "description": "HarmonyOS stock investment ledger",
+  "tags": [
+    "HarmonyOS",
+    "ArkTS",
+    "Finance"
+  ],
+  "keywords": [
+    "stock",
+    "investment",
+    "ledger"
+  ],
+  "license": "Apache-2.0"
+}

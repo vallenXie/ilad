@@ -1,0 +1,60 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "股票投资记录助手"
+    },
+    {
+      "name": "app_description",
+      "value": "专业记录股票维护、投资、余额与汇率的 HarmonyOS 应用"
+    },
+    {
+      "name": "module_desc",
+      "value": "股票投资管理入口模块"
+    },
+    {
+      "name": "mainability_description",
+      "value": "展示股票投资记录主界面"
+    },
+    {
+      "name": "section_stock_header",
+      "value": "股票信息维护"
+    },
+    {
+      "name": "section_stock_subtitle",
+      "value": "新增或更新股票代码、名称与图标，确保投资记录可用"
+    },
+    {
+      "name": "section_investment_header",
+      "value": "投资记录"
+    },
+    {
+      "name": "section_investment_subtitle",
+      "value": "填写股票、方向、份额与单价，系统自动校验并计算金额"
+    },
+    {
+      "name": "section_balance_header",
+      "value": "余额与持仓"
+    },
+    {
+      "name": "section_balance_subtitle",
+      "value": "维护账户余额，查看系统自动更新的资金与股票持仓"
+    },
+    {
+      "name": "section_exchange_header",
+      "value": "人民币 / 美元汇率"
+    },
+    {
+      "name": "section_exchange_subtitle",
+      "value": "实时维护汇率数据，支持双向换算"
+    },
+    {
+      "name": "section_summary_header",
+      "value": "规则说明"
+    },
+    {
+      "name": "section_summary_subtitle",
+      "value": "确保输入合规，系统自动完成金额与余额计算"
+    }
+  ]
+}
