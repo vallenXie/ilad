@@ -1,0 +1,8 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Entry module for HarmonyOS stock ledger",
+  "main": "src/main/ets/application/MainAbility.ets",
+  "dependencies": {},
+  "devDependencies": {}
+}

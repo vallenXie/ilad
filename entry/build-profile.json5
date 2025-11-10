@@ -1,0 +1,20 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "apiVersion": {
+      "compatible": 10,
+      "target": 10
+    },
+    "abilities": [
+      {
+        "name": "MainAbility",
+        "srcEntry": "./src/main/ets/application/MainAbility.ets"
+      }
+    ]
+  }
+}

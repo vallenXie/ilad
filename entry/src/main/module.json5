@@ -1,0 +1,23 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "description": "$string:module_desc",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "abilities": [
+      {
+        "name": "MainAbility",
+        "srcEntry": "./ets/application/MainAbility.ets",
+        "description": "$string:mainability_description",
+        "icon": "$media:app_icon",
+        "label": "$string:app_name",
+        "type": "page",
+        "launchType": "standard"
+      }
+    ]
+  }
+}
