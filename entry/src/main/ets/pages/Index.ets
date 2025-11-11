@@ -535,8 +535,9 @@ struct Index {
         return;
       }
 
-      const unitPrice: number = Number(this.investmentPrice);
-      if (isNaN(unitPrice)) {
+      const priceInput: string = this.investmentPrice.trim();
+      const unitPrice: number = Number(priceInput);
+      if (!priceInput || isNaN(unitPrice)) {
         this.errorMessage = '单价必须为数字。';
         return;
       }
@@ -561,8 +562,9 @@ struct Index {
 
   private handleManualAdjustment(): void {
     this.clearMessages();
-    const amount: number = Number(this.adjustmentAmount);
-    if (isNaN(amount)) {
+    const amountInput: string = this.adjustmentAmount.trim();
+    const amount: number = Number(amountInput);
+    if (!amountInput || isNaN(amount)) {
       this.errorMessage = '金额必须为数字。';
       return;
     }
@@ -588,8 +590,9 @@ struct Index {
       return;
     }
 
-    const rate: number = Number(this.exchangeRate);
-    if (isNaN(rate) || rate <= 0) {
+    const rateInput: string = this.exchangeRate.trim();
+    const rate: number = Number(rateInput);
+    if (!rateInput || isNaN(rate) || rate <= 0) {
       this.errorMessage = '请输入正确的正数汇率。';
       return;
     }
