@@ -525,38 +525,39 @@ struct Index {
     }
   }
 
-  private handleRecordInvestment(): void {
-    this.clearMessages();
+    private handleRecordInvestment(): void {
+      this.clearMessages();
 
-    const quantity: number = parseInt(this.investmentQuantity, 10);
-    if (isNaN(quantity)) {
-      this.errorMessage = '购买份额必须为整数。';
-      return;
-    }
+      const quantityInput: string = this.investmentQuantity.trim();
+      const quantity: number = Number(quantityInput);
+      if (!quantityInput || !Number.isInteger(quantity)) {
+        this.errorMessage = '购买份额必须为整数。';
+        return;
+      }
 
-    const unitPrice: number = Number(this.investmentPrice);
-    if (isNaN(unitPrice)) {
-      this.errorMessage = '单价必须为数字。';
-      return;
-    }
+      const unitPrice: number = Number(this.investmentPrice);
+      if (isNaN(unitPrice)) {
+        this.errorMessage = '单价必须为数字。';
+        return;
+      }
 
-    try {
-      this.store.recordInvestment({
-        stockCode: this.investmentStockCode,
-        direction: this.investmentDirection,
-        quantity,
-        unitPrice,
-        currency: this.investmentCurrency,
-        note: this.investmentNote
-      });
-      this.feedbackMessage = '投资记录已创建。';
-      this.investmentQuantity = '';
-      this.investmentPrice = '';
-      this.investmentNote = '';
-    } catch (error) {
-      this.errorMessage = this.safeMessage(error);
+      try {
+        this.store.recordInvestment({
+          stockCode: this.investmentStockCode,
+          direction: this.investmentDirection,
+          quantity,
+          unitPrice,
+          currency: this.investmentCurrency,
+          note: this.investmentNote
+        });
+        this.feedbackMessage = '投资记录已创建。';
+        this.investmentQuantity = '';
+        this.investmentPrice = '';
+        this.investmentNote = '';
+      } catch (error) {
+        this.errorMessage = this.safeMessage(error);
+      }
     }
-  }
 
   private handleManualAdjustment(): void {
     this.clearMessages();
