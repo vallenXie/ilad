@@ -1,4 +1,4 @@
-import { CurrencyCode, ExchangeRate, InvestmentDirection, InvestmentRecord, ManualBalanceAdjustment, StockHolding, StockInfo } from '../model/StockModels';
+import { CurrencyCode, ExchangeRate, InvestmentDirection, InvestmentRecord, ManualBalanceAdjustment, StockHolding, StockInfo, TravelItinerary } from '../model/StockModels';
 import Logger from '../common/Logger';
 
 const MIN_QUANTITY: number = -999999999;
@@ -19,6 +19,64 @@ const DEFAULT_EXCHANGE_RATES: Array<ExchangeRate> = [
   }
 ];
 
+const DEFAULT_TRAVEL_ITINERARIES: Array<TravelItinerary> = [
+  {
+    id: 'ITI_001',
+    orderNo: '880512345678',
+    passengerName: '王小明',
+    status: '待出行',
+    lastUpdated: new Date(),
+    segments: [
+      {
+        flightNo: 'HU7601',
+        carrier: '海南航空',
+        departAirport: 'PEK T2',
+        departCity: '北京',
+        departTime: new Date('2025-12-01T08:20:00'),
+        arriveAirport: 'SHA T2',
+        arriveCity: '上海虹桥',
+        arriveTime: new Date('2025-12-01T10:45:00'),
+        seatClass: '经济舱',
+        cabinInfo: 'L 舱 · 值机柜台 16-32'
+      }
+    ],
+    note: '来源：航旅纵横行程同步'
+  },
+  {
+    id: 'ITI_002',
+    orderNo: '880598765432',
+    passengerName: '李思思',
+    status: '值机完成',
+    lastUpdated: new Date(),
+    segments: [
+      {
+        flightNo: 'MU5307',
+        carrier: '东方航空',
+        departAirport: 'SHA T1',
+        departCity: '上海虹桥',
+        departTime: new Date('2025-11-25T07:30:00'),
+        arriveAirport: 'SZX T3',
+        arriveCity: '深圳宝安',
+        arriveTime: new Date('2025-11-25T10:05:00'),
+        seatClass: '公务舱',
+        cabinInfo: 'R 舱 · 可线上选座'
+      },
+      {
+        flightNo: 'MU5355',
+        carrier: '东方航空',
+        departAirport: 'SZX T3',
+        departCity: '深圳宝安',
+        departTime: new Date('2025-11-27T16:10:00'),
+        arriveAirport: 'SHA T1',
+        arriveCity: '上海虹桥',
+        arriveTime: new Date('2025-11-27T18:40:00'),
+        seatClass: '公务舱',
+        cabinInfo: 'R 舱 · 行李额 2*32kg'
+      }
+    ]
+  }
+];
+
 @Observed
 export class StockStore {
   private static instance?: StockStore;
@@ -32,6 +90,7 @@ export class StockStore {
     USD: 0
   };
   exchangeRates: Array<ExchangeRate> = [...DEFAULT_EXCHANGE_RATES];
+  travelItineraries: Array<TravelItinerary> = [...DEFAULT_TRAVEL_ITINERARIES];
 
   private constructor() {
     Logger.info('StockStore initialized');
@@ -149,6 +208,11 @@ export class StockStore {
     this.updateAccountBalance(record);
     this.updateHolding(record);
     Logger.info(`记录投资：${stock.code} 金额 ${amount} ${params.currency}`);
+  }
+
+  updateTravelItineraries(itineraries: Array<TravelItinerary>): void {
+    this.travelItineraries = [...itineraries];
+    Logger.info(`更新航旅纵横行程数据，共 ${itineraries.length} 条。`);
   }
 
   private updateAccountBalance(record: InvestmentRecord): void {

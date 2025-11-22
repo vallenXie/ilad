@@ -1,4 +1,4 @@
-import { InvestmentDirection, CurrencyCode, InvestmentRecord, StockInfo, StockHolding, ExchangeRate } from '../model/StockModels';
+import { InvestmentDirection, CurrencyCode, InvestmentRecord, StockInfo, StockHolding, ExchangeRate, TravelItinerary, TravelSegment } from '../model/StockModels';
 import StockStore from '../viewmodel/StockStore';
 
 const SUPPORTED_CURRENCIES: Array<CurrencyCode> = ['CNY', 'USD'];
@@ -39,6 +39,7 @@ struct Index {
         this.renderInvestmentSection();
         this.renderBalanceSection();
         this.renderExchangeSection();
+        this.renderItinerarySection();
         this.renderSummary();
       }
       .padding({ left: 16, right: 16, top: 24, bottom: 24 })
@@ -431,6 +432,89 @@ struct Index {
     .margin({ bottom: 24 });
   }
 
+  private renderItinerarySection(): void {
+    Column() {
+      this.sectionTitle($r('app.string.section_itinerary_header'));
+      this.sectionSubtitle($r('app.string.section_itinerary_subtitle'));
+
+      Column() {
+        if (this.store.travelItineraries.length === 0) {
+          Text('暂无行程信息')
+            .fontColor('#909090')
+            .fontSize(14)
+            .margin({ top: 8 });
+        } else {
+          ForEach(this.store.travelItineraries, (itinerary: TravelItinerary) => {
+            Column() {
+              Row() {
+                Column() {
+                  Text(`${itinerary.passengerName}`)
+                    .fontSize(16)
+                    .fontColor('#202020');
+                  Text(`订单号：${itinerary.orderNo}`)
+                    .fontSize(12)
+                    .fontColor('#606060')
+                    .margin({ top: 4 });
+                }
+                Blank();
+                Text(itinerary.status)
+                  .fontSize(13)
+                  .fontColor(this.statusColor(itinerary.status))
+                  .backgroundColor('#EDF2FF')
+                  .padding({ left: 8, right: 8, top: 4, bottom: 4 })
+                  .borderRadius(12);
+              }
+              .alignItems(VerticalAlign.Top);
+
+              Text(`更新于：${this.formatDate(itinerary.lastUpdated)}`)
+                .fontSize(12)
+                .fontColor('#909090')
+                .margin({ top: 6, bottom: 8 });
+
+              if (itinerary.note) {
+                Text(itinerary.note)
+                  .fontSize(12)
+                  .fontColor('#606060')
+                  .margin({ bottom: 8 });
+              }
+
+              ForEach(itinerary.segments, (segment: TravelSegment, index: number) => {
+                Column() {
+                  Text(`${segment.flightNo} · ${segment.carrier}`)
+                    .fontSize(15)
+                    .fontColor('#202020');
+                  Text(`${segment.departCity} ${segment.departAirport} → ${segment.arriveCity} ${segment.arriveAirport}`)
+                    .fontSize(13)
+                    .fontColor('#606060')
+                    .margin({ top: 4 });
+                  Text(this.formatSegmentTimeRange(segment))
+                    .fontSize(13)
+                    .fontColor('#202020')
+                    .margin({ top: 4 });
+                  Text(`${segment.seatClass}${segment.cabinInfo ? ` · ${segment.cabinInfo}` : ''}`)
+                    .fontSize(12)
+                    .fontColor('#606060')
+                    .margin({ top: 4 });
+                }
+                .padding({ top: 12, bottom: 12 })
+                .border({
+                  width: { top: index === 0 ? 0 : 0.5, bottom: 0 },
+                  color: '#EFEFEF'
+                });
+              }, (segment: TravelSegment) => `${itinerary.id}-${segment.flightNo}-${segment.departTime.getTime()}`);
+            }
+            .padding({ top: 16, bottom: 16 })
+            .border({ width: { bottom: 0.5 }, color: '#EFEFEF' });
+          }, (itinerary: TravelItinerary) => itinerary.id);
+        }
+      }
+      .backgroundColor(Color.White)
+      .padding(16)
+      .borderRadius(12);
+    }
+    .margin({ bottom: 24 });
+  }
+
   private renderSummary(): void {
     Column() {
       this.sectionTitle($r('app.string.section_summary_header'));
@@ -622,6 +706,27 @@ struct Index {
 
   private pad(value: number): string {
     return value < 10 ? `0${value}` : `${value}`;
+  }
+
+  private formatSegmentTimeRange(segment: TravelSegment): string {
+    return `${this.formatDate(segment.departTime)} → ${this.formatDate(segment.arriveTime)}`;
+  }
+
+  private statusColor(status: string): string {
+    switch (status) {
+      case '待出行':
+        return '#0057FF';
+      case '值机完成':
+        return '#0D8A1E';
+      case '已起飞':
+        return '#FF8C00';
+      case '已完成':
+        return '#202020';
+      case '已取消':
+        return '#D93025';
+      default:
+        return '#202020';
+    }
   }
 
   private clearMessages(): void {

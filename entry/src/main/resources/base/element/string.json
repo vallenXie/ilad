@@ -55,6 +55,14 @@
     {
       "name": "section_summary_subtitle",
       "value": "确保输入合规，系统自动完成金额与余额计算"
+    },
+    {
+      "name": "section_itinerary_header",
+      "value": "航旅纵横行程"
+    },
+    {
+      "name": "section_itinerary_subtitle",
+      "value": "展示航旅纵横同步的航班行程，掌握最新出行动态"
     }
   ]
 }
